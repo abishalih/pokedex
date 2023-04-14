@@ -4,19 +4,22 @@ export type MenuProps = {
     icon?: string; 
     label?: string;
 }
-const Container = styled.div`
+const Wrapper = styled.div`
+    align-items: center;
     display: flex;
+    gap: .5rem;
     img{
         display: block;
+        height: 25px;
     }
 `;
 
 const Menu = ({ icon, label }: MenuProps) => {
   return (
-    <Container>
+    <Wrapper>
         <img src={icon} />
         <div>{ label }</div>
-    </Container>
+    </Wrapper>
   )
 }
 
