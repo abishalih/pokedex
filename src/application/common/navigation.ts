@@ -1,3 +1,4 @@
+
 export const MENU_NAVIGATION = [
-    { label: "Pokedex" },
+    { icon:"/pokemon.ico",  label: "Pokedex" },
 ]
