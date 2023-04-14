@@ -1,4 +1,4 @@
-import Card from "../../components/card";
+import Card from "../../components/Card";
 import Menu, { MenuProps } from "./Menu";
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
 const Header = ({ menu=[] }: Props) => {
   return (
     <Card>
-        {menu.map((menuProps)=>(<Menu {...menuProps} />))}
+        {menu.map((menuProps, key)=>(<Menu {...menuProps} key={key} />))}
     </Card>
   )
 }

@@ -17,7 +17,7 @@ const Wrapper = styled.div`
 const Menu = ({ icon, label }: MenuProps) => {
   return (
     <Wrapper>
-        <img src={icon} />
+        <img src={icon} alt={label} />
         <div>{ label }</div>
     </Wrapper>
   )
