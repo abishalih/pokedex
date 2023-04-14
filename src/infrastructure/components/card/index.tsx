@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 
-const Container = styled.div`
+const Wrapper = styled.div`
     display: flex;
     gap: 1rem;
     background-color: white;
@@ -16,7 +16,7 @@ type Props = {
 
 const Card = ({ children }: Props) => {
   return (
-    <Container>{ children }</Container>
+    <Wrapper>{ children }</Wrapper>
   )
 }
 
