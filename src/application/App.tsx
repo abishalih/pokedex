@@ -1,7 +1,10 @@
+import Template from "../infrastructure/template";
 
 function App() {
   return (
-    <div></div>
+      <Template>
+
+      </Template>
   );
 }
 
