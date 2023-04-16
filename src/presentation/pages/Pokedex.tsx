@@ -1,20 +1,23 @@
 import styled from "styled-components";
+import { PokemonProvider } from "../../infrastructure/components/Context";
 import DetailPokemon from "../containers/DetailPokemon";
 import ListPokedex from "../containers/ListPokedex";
 
 const Wrapper = styled.div`
     display: flex;
-    gap: 1rem;
+    gap: 2rem;
 `;
 
 type Props = {}
 
 const Pokedex = (props: Props) => {
   return (
-    <Wrapper>
+    <PokemonProvider>
+      <Wrapper>
         <ListPokedex />
         <DetailPokemon />
-    </Wrapper>
+      </Wrapper>
+    </PokemonProvider>
   )
 }
 
