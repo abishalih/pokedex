@@ -1,12 +1,13 @@
 import axios from "axios";
-import { useState } from "react";
+import React, { useState } from "react";
+import { SetFilterProps } from "../../../presentation/containers/ListPokedex/useFilterPokedex";
 
 interface Option {
     id: number;
     name: string;
 }
 
-export const useDropdown = (api: string="") => {
+export const useDropdown = (api: string="", label: string="", setFilter: SetFilterProps) => {
     const [options, setOptions] = useState<Option[]>([]);
     const [selectedOption, setSelectedOption] = useState<Option | null>(null);
     const handleClick = async () => {
@@ -20,6 +21,11 @@ export const useDropdown = (api: string="") => {
             console.error('Failed to fetch options', error);
         }
     };
-    return { handleClick, options, selectedOption, setSelectedOption }
+    const handleChange = (event: React.FormEvent<HTMLSelectElement>) => {
+        const value: string = event.currentTarget.value;
+        setFilter(label, value);
+        
+    };
+    return { handleChange, handleClick, options, selectedOption, setSelectedOption }
 
 };

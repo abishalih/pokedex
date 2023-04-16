@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { SetFilterProps } from "../../../presentation/containers/ListPokedex/useFilterPokedex";
 import { useDropdown } from "./useDropdown";
 
 const Wrapper = styled.select`
@@ -19,13 +20,14 @@ const Option = styled.option`
 export type DropdownProps = {
   api: string;
   label?: string;
+  setFilter: SetFilterProps;
 };
 
-const Dropdown = ({ api, label }: DropdownProps) => {
-  const { handleClick, options,  } = useDropdown(api);
+const Dropdown = ({ api, label, setFilter }: DropdownProps) => {
+  const { handleChange, handleClick, options, } = useDropdown(api, label, setFilter);
   
   return (
-    <Wrapper onClick={handleClick}>
+    <Wrapper onClick={handleClick} onChange={handleChange}>
       <Option value=""> - {label} - </Option>
       {options.map(({id, name}, key)=>(
           <Option key={key} value={id}>{name}</Option>
