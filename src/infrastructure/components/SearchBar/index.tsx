@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { SetFilterProps } from "../../../presentation/containers/ListPokedex/useFilterPokedex";
+import { useSearchBar } from "./useSearchBar";
 
 const SearchBox = styled.input`
   background: white;
@@ -14,11 +16,13 @@ const SearchBox = styled.input`
 
 type Props = {
     placeholder?: string;
+    setFilter: SetFilterProps;
 }
 
-const SearchBar = ({ placeholder="Here we search" }: Props) => {
+const SearchBar = (props: Props) => {
+  const searchProps = useSearchBar(props) 
   return (
-    <SearchBox placeholder={placeholder} />
+    <SearchBox {...searchProps} />
   )
 }
 
