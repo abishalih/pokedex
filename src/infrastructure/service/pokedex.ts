@@ -8,7 +8,7 @@ export async function getListPokemon(setLoading:(isLoading:boolean)=>void) {
         const { data } = await axios.get(`${API_POKEMON}?limit=100000&offset=0`);
         const res: Array<PokemonProps> = data.results ? data.results : data || [];
         const result: Array<PokemonProps> = await Promise.all(res.map(({ url = "" }) => getDetailPokemon(url))).finally(()=>setLoading(false));
-        return result;
+        return result.map((list, order)=>({...list, order}));
     } catch (error) {
         console.error("Failed to fetch options", error);
         return [];
