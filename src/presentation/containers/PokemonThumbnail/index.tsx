@@ -9,8 +9,9 @@ export type PokemonProps = {
   complete?: boolean;
   id?: number;
   name?: string;
-  url?: string;
+  order?: number;
   types?: Array<string>;
+  url?: string;
 };
 
 const Wrapper = styled.div<{ complete?: boolean }>`

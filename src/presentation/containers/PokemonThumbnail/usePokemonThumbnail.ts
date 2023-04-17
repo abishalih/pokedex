@@ -15,10 +15,10 @@ const usePokemonThumbnail = ({complete, ...props}:PokemonProps) => {
     };
     
     useEffect(() => {
-        const getDetailPokemon = async () => {
+        const getDetailPokemon = async (pokemonId?:number) => {
             try {
                 await setLoading(true)
-                const { data } = await axios.get(`${API_POKEMON}/${id}`);
+                const { data } = await axios.get(`${API_POKEMON}/${pokemonId}`);
                 const result:DetailProps = await data.results?data.results:data;
                 await setPokemonData( {...result, types: result.types?.map(({ type })=> type?.name || "")});
                 setLoading(false)
@@ -28,8 +28,9 @@ const usePokemonThumbnail = ({complete, ...props}:PokemonProps) => {
             }
         };
         
-        if(complete && id) getDetailPokemon();
-    }, [complete, id])
+        if(complete && id) getDetailPokemon(id);
+        if(!complete && props.id!==pokemonData.id) getDetailPokemon(props.id);
+    }, [complete, id, props.id])
     return { ...pokemonData, complete, handleClick, isLoading };
 }
 
