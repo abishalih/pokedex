@@ -22,8 +22,6 @@ export const useFilterPokedex = (data: FilterProps[] = []) => {
 
 
 export const filterPokemon = (data: Array<PokemonProps>=[], filters: ParamsProps={}, pageFrom:number=0, pageTo:number=9) => {
-  console.log({pageFrom, pageTo});
-  
   const result = data
     .filter(({ name }) => {
       if(filters.name){
@@ -39,7 +37,8 @@ export const filterPokemon = (data: Array<PokemonProps>=[], filters: ParamsProps
       }
       return true;
     })
-    .filter((_, key) => key>pageFrom)
-    .filter((_, key) => key<pageTo);
+    .filter(({ order=0 }) => {
+      return order >= pageFrom && order < pageTo; 
+    });
   return result;
 }

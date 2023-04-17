@@ -31,6 +31,9 @@ export type ParamsProps = {
 const ListPokedex = () => {
   const { filters={}, setFilter } = useFilterPokedex(FILTER_LIST);
   const { listPokemon=[], isLoading, fromPage, toPage, nextPage, prevPage } = useListPokedex();
+  const filteredPokemon = filterPokemon(listPokemon, filters, fromPage, toPage);
+  console.log(filteredPokemon);
+  
   return (
     <Wrapper>
         {isLoading?
@@ -40,7 +43,7 @@ const ListPokedex = () => {
           <FilterPokedex filters={FILTER_LIST} setFilter={setFilter} />
           <Pagination nextPage={nextPage} prevPage={prevPage} />
           <Grid>
-            { filterPokemon(listPokemon, filters, fromPage, toPage).map((thumbnailProps:PokemonProps, key:number)=>(
+            { filteredPokemon.map((thumbnailProps:PokemonProps, key:number)=>(
               <PokemonThumbnail {...thumbnailProps} key={key} />
             )) }
           </Grid>
