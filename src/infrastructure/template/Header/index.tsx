@@ -1,4 +1,4 @@
-import Card from "../../components/Card";
+import Card from "../../components/card";
 import Menu, { MenuProps } from "./Menu";
 
 type Props = {

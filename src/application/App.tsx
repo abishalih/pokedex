@@ -1,11 +1,18 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Template from "../infrastructure/template";
-import Pokedex from "../presentation/pages/Pokedex";
+import PokemonDetails from "../presentation/pages/PokemonDetails";
+import PokemonList from "../presentation/pages/PokemonList";
 
 function App() {
   return (
+    <BrowserRouter>
       <Template>
-        <Pokedex />
+      <Routes>
+        <Route path="/" element={ <PokemonList /> } />
+        <Route path="/pokemon/:name" element={ <PokemonDetails /> } />
+      </Routes>
       </Template>
+    </BrowserRouter>
   );
 }
 

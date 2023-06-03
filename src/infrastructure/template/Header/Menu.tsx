@@ -4,10 +4,12 @@ export type MenuProps = {
     icon?: string; 
     label?: string;
 }
-const Wrapper = styled.div`
+const Wrapper = styled.a`
+    color: black;
     align-items: center;
     display: flex;
     gap: .5rem;
+    text-decoration: none;
     img{
         display: block;
         height: 25px;
@@ -16,7 +18,7 @@ const Wrapper = styled.div`
 
 const Menu = ({ icon, label }: MenuProps) => {
   return (
-    <Wrapper>
+    <Wrapper href="/">
         <img src={icon} alt={label} />
         <div>{ label }</div>
     </Wrapper>

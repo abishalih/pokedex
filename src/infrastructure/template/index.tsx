@@ -5,11 +5,18 @@ import Container from "./Container";
 import Header from "./Header";
 
 const Wrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
-    margin: 3rem auto;
-    width: 75%;
+  background-color: #ff174b;
+  border: 1px solid gray;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  height: 750px;
+  gap: 1rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 2rem;
+  margin: 1rem auto;
+  width: 500px;
 `;
 
 type Props = {
@@ -18,7 +25,7 @@ type Props = {
 
 const Template = ({ children }: Props) => {
   return (
-    <Wrapper>
+    <Wrapper id="scrollableDiv">
         <Header menu={MENU_NAVIGATION} />
         <Container>{ children }</Container>
     </Wrapper>
