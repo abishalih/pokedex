@@ -20,6 +20,9 @@ interface SpritesProps {
   front_shiny_female?: string;
 }
 
+interface AbilitiesProps {
+  ability?: {name:string};
+}
 interface TypeProps {
   slot?: boolean;
   type?: {
@@ -27,21 +30,24 @@ interface TypeProps {
   };
 }
 interface PokemonProps {
+  abilities?: Array<AbilitiesProps>;
   complete?: boolean;
   id?: number;
+  height?: string;
   name?: string;
   order?: number;
   sprites?: SpritesProps;
   types?: Array<TypeProps>;
   url?: string;
+  weight?: string;
 }
 
 const Thumbnail = styled.div`
   background-color: white;
   align-items: center;
   display: grid;
-  grid-template-columns: 2fr 5fr;
-  div{
+  grid-template-columns: 2fr 4fr 3fr;
+  div.info{
     p{
       margin: 12px 0;
       font-size: 18px;
@@ -52,6 +58,16 @@ const ThumbnailTypes = styled.div`
   align-items: center;
   display: flex;
   gap: 1rem;
+`;
+const Stats = styled.div`
+  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: .5rem;
+  padding: .5rem;
+  p{
+    font-size: 14px;
+  }
 `;
 const PokemonType = styled.div<{ type?: string }>`
   background: ${({ type = "" }) => POKEMON_TYPE_COLOR[type]};
@@ -78,12 +94,12 @@ const PokemonDetails: React.FC = () => {
   if (!pokemon) {
     return <div>Loading...</div>;
   }
-
+  const { abilities = []} = pokemon;
   return (
     <div>
       <Thumbnail>
         <img src={pokemon.sprites?.front_default} alt={pokemon.name} />
-        <div>
+        <div className='info'>
           <p>#{pokemon.id} | { titleCase(pokemon.name)}</p>
           <ThumbnailTypes>
             {pokemon.types?.map(({type}, key)=>(
@@ -91,6 +107,11 @@ const PokemonDetails: React.FC = () => {
             ))}
           </ThumbnailTypes>
         </div>
+        <Stats>
+          <p>Height: {pokemon.height}</p>
+          <p>Weight: {pokemon.weight}</p>
+          <p>Ability: {titleCase(abilities[0]?.ability?.name)}</p>
+        </Stats>
       </Thumbnail>
     </div>
   );
