@@ -10,7 +10,7 @@ const Wrapper = styled.div`
   border-radius: 1rem;
   display: flex;
   flex-direction: column;
-  height: 750px;
+  max-height: 750px;
   gap: 1rem;
   overflow-x: hidden;
   overflow-y: auto;

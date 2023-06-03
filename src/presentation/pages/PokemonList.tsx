@@ -78,11 +78,17 @@ const PokemonType = styled.div<{ type?: string }>`
   padding: .25rem .75rem;
 `;
 
+const SearchBar = styled.input`
+  margin-bottom: 16px;
+  padding: 8px;
+`;
+
 interface PokemonThumbnailProps {
   name: string;
+  filter?:string;
 }
 
-const PokemonThumbnail: React.FC<PokemonThumbnailProps> = ({ name }) => {
+const PokemonThumbnail: React.FC<PokemonThumbnailProps> = ({ filter="", name }) => {
   const [pokemon, setPokemon] = useState<PokemonProps | null>(null);
 
   useEffect(() => {
@@ -97,8 +103,9 @@ const PokemonThumbnail: React.FC<PokemonThumbnailProps> = ({ name }) => {
   if (!pokemon) {
     return <div>Loading...</div>;
   }
-
-  return (
+  
+  const filteredPokemonList = !filter || pokemon.types?.some((type) => type.type?.name?.toLowerCase().includes(filter.toLowerCase()));
+  if(filteredPokemonList) return (
     <Link to={`/pokemon/${pokemon.name}`}>
       <ListItem>
         <Thumbnail>
@@ -116,12 +123,14 @@ const PokemonThumbnail: React.FC<PokemonThumbnailProps> = ({ name }) => {
       </ListItem>
     </Link>
   );
+  return null
 };
 
 const PokemonList: React.FC = () => {
   const [pokemonList, setPokemonList] = useState<PokemonProps[]>([]);
   const [nextUrl, setNextUrl] = useState<string | null>(null);
-
+  const [filter, setFilter] = useState<string>('');
+  
   useEffect(() => {
     fetchPokemonList();
   }, []);
@@ -149,8 +158,13 @@ const PokemonList: React.FC = () => {
     }
   };
 
+  const handleFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFilter(event.target.value);
+  };
+
   return (
     <Container >
+      <SearchBar type="text" placeholder="Search Pokémon" value={filter} onChange={handleFilterChange} />
       <InfiniteScroll
         dataLength={pokemonList.length}
         next={fetchMorePokemon}
@@ -162,7 +176,7 @@ const PokemonList: React.FC = () => {
         <List>
           {pokemonList.map((pokemon: PokemonProps) => (
             <li key={pokemon.name}>
-              <PokemonThumbnail name={pokemon.name || ''} />
+              <PokemonThumbnail name={pokemon.name || ''} filter={filter} />
             </li>
           ))}
         </List>
